@@ -9,6 +9,7 @@ app_id = os.environ.get('dictionary_api_id')
 app_key = os.environ.get('dictionary_api_key')
 endpoint = "entries"
 
+# api credentials
 
 language_code = "en-us"
 word_id = "find"
