@@ -1,5 +1,12 @@
-from main import *
+from main import requests, app_id, app_key, language_code, endpoint
 
+word='slow'
+url = f"https://od-api.oxforddictionaries.com/api/v2/{endpoint}/{language_code}/{word.lower()}"
+word_definition_request = requests.get(url, headers={"app_id": app_id, "app_key": app_key})
+
+print(word_definition_request.json())
+
+#
 # print(response.json())
 
 # import json
@@ -28,16 +35,16 @@ from main import *
 #
 
 
-list=[1,2,3,4,5,6]
-
-
-if len(list) in range(0,5):
-    print('it is less than 5')
-else:
-    print('it is not less than 5')
-    list=list[:5]
-
-
+# list=[1,2,3,4,5,6]
+#
+#
+# if len(list) in range(0,5):
+#     print('it is less than 5')
+# else:
+#     print('it is not less than 5')
+#     list=list[:5]
+#
+#
 
 # if len() in counter:
 #     print("it is less than 5")

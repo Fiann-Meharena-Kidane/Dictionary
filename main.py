@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request
 
-from tools import shorten_list
+from tools import *
 import json
 import requests
 import os
@@ -53,19 +53,21 @@ def result():
                     senses = dictionary['senses']
 
                     # definitions
-                    for row in senses:
+                    for senses_dictionary in senses:
+                        # list_of_definitions.append(senses_dictionary['definitions'])
 
                         try:
-                            list_of_definitions.append(row['definitions'][0])
+                            list_of_definitions.append(senses_dictionary['definitions'][0])
                         except:
                             return 'something went wrong'
+
                         else:
                             # list_of_definitions.append(row['definitions'])
-                            list_of_definitions.append(row['definitions'][0])
+                            list_of_definitions.append(senses_dictionary['definitions'][0])
 
                         # examples ...
                         try:
-                            list_of_examples_raw = row['examples']
+                            list_of_examples_raw = senses_dictionary['examples']
                         except:
                             list_of_examples = []
                         else:
@@ -75,11 +77,12 @@ def result():
                         # list_of_examples.append(row['examples'][0]['text'])
     else:
         return render_template('index.html', message="Sorry, we could not find that word")
+
     print(list_of_definitions)
     print(list_of_examples)
 
-
-    return render_template('index.html', definitions=shorten_list(list_of_definitions),
+    return render_template('index.html',
+                           definitions=shorten_list(list_of_definitions),
                            examples=shorten_list(list_of_examples),
                            word_found=True,
                            message='Ah! Got it!')
