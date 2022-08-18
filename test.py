@@ -1,10 +1,49 @@
-from main import requests, app_id, app_key, language_code, endpoint
+# from main import requests, app_id, app_key, language_code, endpoint
+#
+# word='put'
+# url = f"https://od-api.oxforddictionaries.com/api/v2/{endpoint}/{language_code}/{word.lower()}"
+# word_definition_request = requests.get(url, headers={"app_id": app_id, "app_key": app_key})
+#
+# print(word_definition_request.json())
 
-word='slow'
-url = f"https://od-api.oxforddictionaries.com/api/v2/{endpoint}/{language_code}/{word.lower()}"
-word_definition_request = requests.get(url, headers={"app_id": app_id, "app_key": app_key})
+demo=['the place where one lives permanently, especially as a member of a family or household', 'an institution for people needing professional care or supervision', '(in sports) the goal or end point', 'relating to the place where one lives', "(of a sports game) played at the team's own field or court", 'denoting the administrative center of an organization', 'to or at the place where one lives', '(of an animal) return by instinct to its territory after leaving it', 'move or be aimed toward (a target or destination) with great accuracy']
 
-print(word_definition_request.json())
+print(len(demo))
+
+
+def shorten_list(my_list):
+    if len(my_list) < 5:
+        if len(my_list) == 0:
+            my_list=['Sorry,Could not find one at the moment.'
+                     'We definitely would soon']
+            return my_list
+    elif len(my_list) > 5:
+        my_list=my_list[:5]
+        return my_list
+    else:
+        return my_list
+
+
+print(shorten_list(demo))
+print(len(shorten_list(demo)))
+
+
+# print(len(demo))
+#
+# print(len(demo) in range(0,5))
+# print(result)
+
+
+
+
+
+
+
+
+
+
+
+
 
 #
 # print(response.json())
