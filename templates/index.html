@@ -44,51 +44,65 @@
                     <div class="card-inner p-3 d-flex flex-column align-items-center">
 <!--                        <img src="https://i.imgur.com/Mb8kaPV.png" width="50">-->
                         <div class="icon-holder">
-                            <i class="fa-solid fa-book fa-2xl"></i>
+                            <a href="{{ url_for('home') }}">
+                                <i class="fa-solid fa-house-user fa-2xl"> </i>
+                            </a>
+
+
                         </div>
                         <div class="text-center mg-text">
-                            <span class="mg-text">Account</span>
+                            <span class="mg-text">Home</span>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-2">
-                <div class="card-inner p-3 d-flex flex-column align-items-center">
-<!--                    <img src="https://i.imgur.com/ueLEPGq.png" width="50">-->
-                        <div class="icon-holder">
-                            <i class="fa-solid fa-book fa-2xl"></i>
-                        </div>
-                    <div class="text-center mg-text"> <span class="mg-text">Payments</span>
-                    </div>
-                </div>
-            </div>
+                        <div class="card-inner p-3 d-flex flex-column align-items-center">
+                                <div class="icon-holder">
+
+                                    <a>
+                                        <i class="fa-solid fa-star fa-2xl"></i>
+                                    </a>
+                                </div>
+                            <div class="text-center mg-text"> <span class="mg-text">Favourites</span>
+                            </div>
+
+                         </div>
+                 </div>
+
+
                 <div class="col-md-2">
                     <div class="card-inner p-3 d-flex flex-column align-items-center">
 <!--                        <img src="https://i.imgur.com/tmqv0Eq.png" width="50">-->
                         <div class="icon-holder">
-                            <i class="fa-solid fa-book fa-2xl"></i>
+                            <i class="fa-solid fa-file-pen fa-2xl"></i>
                         </div>
-                        <div class="text-center mg-text"> <span class="mg-text">Delivery</span>
+                        <div class="text-center mg-text"> <span class="mg-text">Quiz</span>
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-md-2">
                     <div class="card-inner p-3 d-flex flex-column align-items-center">
                         <div class="icon-holder">
-                            <i class="fa-solid fa-book fa-2xl"></i>
+                            <i class="fa-solid fa-language fa-2xl"></i>
                         </div>
 <!--                        <img src="{{ url_for('static', filename='images/sample.png') }}" width="60">-->
-                        <div class="text-center mg-text"> <span class="mg-text">Product</span>
+                        <div class="text-center mg-text"> <span class="mg-text">Language</span>
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-md-2">
                     <div class="card-inner p-3 d-flex flex-column align-items-center">
                         <div class="icon-holder">
-                            <i class="fa-solid fa-book fa-2xl"></i>
+                            <i class="fa-solid fa-envelope fa-2xl"></i>
                         </div>
 <!--                        <img src="https://i.imgur.com/Z7BJ8Po.png" width="50">-->
                         <div class="text-center mg-text">
-                        <span class="mg-text">Return</span>
+                        <span class="mg-text">Email Us</span>
                     </div>
                     </div>
                 </div>
@@ -96,9 +110,9 @@
                     <div class="card-inner p-3 d-flex flex-column align-items-center">
 <!--                        <img src="https://i.imgur.com/YLsQrn3.png" width="50">-->
                         <div class="icon-holder">
-                            <i class="fa-solid fa-book fa-2xl"></i>
+                            <i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i>
                         </div>
-                        <div class="text-center mg-text"> <span class="mg-text">Guarantee</span>
+                        <div class="text-center mg-text"> <span class="mg-text">Logout</span>
                         </div>
                     </div>
                 </div>
@@ -106,33 +120,29 @@
 
 
 
-
                 {% if word_found %}
+<!--                if search was successful -->
 
                 <div class="result-container">
                      <div class="card text-center">
-                          <div  style="background-color:#e3dcca;" class="card-header">
-                            Here We Go!
-                          </div>
+                             <p class="btn btn-primary btn-lg btn-block">Here We Go!</p>
 
                           <div class="card-body">
-<!--                            <h5 class="card-title">Result for word!!</h5>-->
-<!--                            <p class="card-text">sample definition</p>-->
 
-
-
-                              <div class="container-fluid">
+                              <div class="container-fluid result-board rounded">
                                     <div class="row">
-                                        <div style="background-color:bisque;" class="col-lg-6">
+                                        <div class="col-lg-6">
 
                                             <div class="card-text definitions">
 
-                                                      Definitions :
+<!--                                                      Definitions :-->
+                                                    <p class="btn btn-primary btn-lg btn-block label"> Definitions </p>
+
 
                                                       {% for def in definitions %}
 
                                                       <p class="card-text definition-text">
-                                                         {{ def }}
+                                                          <i class="fa-solid fa-caret-right"></i> {{ def }}
                                                       </p>
 
                                                        {% endfor %}
@@ -141,17 +151,17 @@
 
                                         </div>
 
-                                        <div style="background-color:bisque;" class="col-lg-6">
+                                        <div class="col-lg-6">
 
                                             <div class="card-text examples">
 
-                                                  Examples :
+                                                <p  class="btn btn-primary btn-lg btn-block label">   Examples  </p>
 
 
                                                   {% for example in examples %}
 
                                                   <p class="card-text example-text">
-                                                      {{ example }}
+                                                      <i class="fa-solid fa-caret-right"></i> {{ example }}
                                                   </p>
 
                                                   {% endfor %}
@@ -161,37 +171,6 @@
                                         </div>
                                     </div>
                               </div>
-
-
-
-
-
-<!--                              <div class="card-text definitions">-->
-
-<!--                                  Definitions :-->
-
-<!--                                  {% for def in definitions %}-->
-
-<!--                                  <p class="card-text definition-text">-->
-<!--                                     {{ def }}-->
-<!--                                  </p>-->
-
-<!--                                   {% endfor %}-->
-
-<!--                              </div>-->
-
-<!--                              <div class="card-text examples">-->
-
-<!--                                  Examples :-->
-
-
-<!--                                  {% for example in examples %}-->
-
-<!--                                  <p class="card-text example-text">-->
-<!--                                      {{ example }}-->
-<!--                                  </p>-->
-
-<!--                                  {% endfor %}-->
 
                               </div>
 
@@ -203,7 +182,7 @@
                           </div>
 
                           <div class="card-footer text-muted">
-                            Word of the day -- >
+                            Word of the day
                           </div>
                      </div>
 

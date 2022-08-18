@@ -92,6 +92,7 @@ a:link {
 
 .icon-holder{
 padding-bottom:10px;
+
 }
 
 .card-inner:hover{
@@ -113,7 +114,12 @@ padding-bottom:10px;
 }
 
 .result-container{
-    padding-top:3%;
+    padding-top:1%;
+
+}
+
+.result-board{
+
 
 }
 
@@ -133,12 +139,29 @@ text-align:center;
 
 }
 
-.examples{
+.examples, .definitions{
 color:blue;
+
 
 }
 
 .definition-text{
+color:black;
+
+}
+
+.label{
+
+
+}
+
+.card-footer{
+text-align:center;
+
+}
+
+.fa-solid{
+
 color:black;
 
 }
