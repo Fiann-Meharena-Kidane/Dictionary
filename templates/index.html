@@ -27,7 +27,7 @@
             <div class="col-md-9">
 
                 <div class="card p-4 mt-3">
-                    <h3 class="heading mt-5 text-center">Welcome!</h3>
+                    <h3 class="heading mt-5 text-center">{{ message }}</h3>
 
                     <div class="d-flex justify-content-center px-5">
                         <div style="background-color:bisque" class="search">
@@ -105,14 +105,9 @@
 
 
 
-{% if result %}
-
-{% endif%}
 
 
-
-
-
+                {% if word_found %}
 
                 <div class="result-container">
                      <div class="card text-center">
@@ -124,30 +119,99 @@
 <!--                            <h5 class="card-title">Result for word!!</h5>-->
 <!--                            <p class="card-text">sample definition</p>-->
 
-                              <div class="definition">
-                                  <p class="card-text">
-                                      definitions......
-                                  </p>
+
+
+                              <div class="container-fluid">
+                                    <div class="row">
+                                        <div style="background-color:bisque;" class="col-lg-6">
+
+                                            <div class="card-text definitions">
+
+                                                      Definitions :
+
+                                                      {% for def in definitions %}
+
+                                                      <p class="card-text definition-text">
+                                                         {{ def }}
+                                                      </p>
+
+                                                       {% endfor %}
+
+                                              </div>
+
+                                        </div>
+
+                                        <div style="background-color:bisque;" class="col-lg-6">
+
+                                            <div class="card-text examples">
+
+                                                  Examples :
+
+
+                                                  {% for example in examples %}
+
+                                                  <p class="card-text example-text">
+                                                      {{ example }}
+                                                  </p>
+
+                                                  {% endfor %}
+
+                                            </div>
+
+                                        </div>
+                                    </div>
                               </div>
 
-                              <div class="card-text examples">
-                                    <p class="card-text">examples .....
-                                    </p>
+
+
+
+
+<!--                              <div class="card-text definitions">-->
+
+<!--                                  Definitions :-->
+
+<!--                                  {% for def in definitions %}-->
+
+<!--                                  <p class="card-text definition-text">-->
+<!--                                     {{ def }}-->
+<!--                                  </p>-->
+
+<!--                                   {% endfor %}-->
+
+<!--                              </div>-->
+
+<!--                              <div class="card-text examples">-->
+
+<!--                                  Examples :-->
+
+
+<!--                                  {% for example in examples %}-->
+
+<!--                                  <p class="card-text example-text">-->
+<!--                                      {{ example }}-->
+<!--                                  </p>-->
+
+<!--                                  {% endfor %}-->
+
                               </div>
 
                               <div class="level">
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <a href="#" class="btn btn-outline-primary">Easy</a>
+                                    <a href="#" class="btn btn-outline-success">Medium</a>
+                                    <a href="#" class="btn btn-outline-danger ">Hard</a>
                               </div>
                           </div>
 
                           <div class="card-footer text-muted">
-                            2 days ago
+                            Word of the day -- >
                           </div>
                      </div>
 
                 </div>
+
+
+                {% endif %}
+
 
 
 

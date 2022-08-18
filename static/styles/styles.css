@@ -122,9 +122,24 @@ padding-bottom:10px;
     text-align:left;
 }
 
+.def{
+background-color:blue;
+text-align:left;
+
+}
 .level{
-padding-right:10px;
+padding-bottom:10px;
 text-align:center;
+
+}
+
+.examples{
+color:blue;
+
+}
+
+.definition-text{
+color:red;
 
 }
 
