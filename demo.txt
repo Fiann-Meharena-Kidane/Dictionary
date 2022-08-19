@@ -1,0 +1,2 @@
+footer with copyright and links,
+replace search result section with card from mdbootstarap

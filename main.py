@@ -37,5 +37,16 @@ def result():
                            message='Ah! Got it!')
 
 
+@app.route('/login', methods=['POST','GET'])
+def login():
+    # return 'logged in'
+    return render_template('login.html')
+
+
+@app.route('/register', methods=['POST','GET'])
+def register():
+    return render_template('login.html', register=True)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
