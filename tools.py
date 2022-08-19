@@ -53,3 +53,5 @@ def request_handler(endpoint, language_code, word, app_id, app_key):
     }
 
     return data
+
+

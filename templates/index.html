@@ -27,20 +27,59 @@
             <div class="col-md-9">
 
                 <div class="card p-4 mt-3">
-                    <h3 class="heading mt-5 text-center">{{ message }}</h3>
+                    <h3 class="heading mt-5 text-center"> Welcome {{ current_user.username }}!</h3>
 
                     <div class="d-flex justify-content-center px-5">
                         <div style="background-color:bisque" class="search">
 
+                            {% if current_user %}
                             <form action="{{ url_for('result') }}" method="post">
+
                                  <input type="text" class="search-input" placeholder="Search..." name="word">
+
                             </form>
-<!--                            <i class="fa-solid fa-magnifying-glass"></i>-->
+                            {% endif %}
                         </div>
                     </div>
 
             <div class="row mt-4 g-1 px-4 mb-5">
-                <div class="col-md-2">
+
+
+                {% if not current_user %}
+
+                <div class="col-md-6">
+                    <div class="card-inner p-3 d-flex flex-column align-items-center">
+<!--                        <img src="https://i.imgur.com/Mb8kaPV.png" width="50">-->
+                        <div class="icon-holder">
+                            <a href="{{ url_for('register') }}">
+                                <i class="fa-solid fa-address-card fa-2xl"></i>
+                            </a>
+
+                        </div>
+                        <div class="text-center mg-text">
+                            <span class="mg-text">Register</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card-inner p-3 d-flex flex-column align-items-center">
+<!--                        <img src="https://i.imgur.com/Mb8kaPV.png" width="50">-->
+                        <div class="icon-holder">
+                            <a href="{{ url_for('login') }}">
+                                <i class="fa-solid fa-arrow-right-to-bracket fa-2xl"></i>
+                            </a>
+
+                        </div>
+                        <div class="text-center mg-text">
+                            <span class="mg-text">Login</span>
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
+
+                                <div class="col-md-2">
                     <div class="card-inner p-3 d-flex flex-column align-items-center">
 <!--                        <img src="https://i.imgur.com/Mb8kaPV.png" width="50">-->
                         <div class="icon-holder">
@@ -48,13 +87,18 @@
                                 <i class="fa-solid fa-house-user fa-2xl"> </i>
                             </a>
 
-
                         </div>
                         <div class="text-center mg-text">
                             <span class="mg-text">Home</span>
                         </div>
                     </div>
                 </div>
+
+                {% endif %}
+
+
+
+                {% if current_user  %}
 
                 <div class="col-md-2">
                         <div class="card-inner p-3 d-flex flex-column align-items-center">
@@ -110,13 +154,21 @@
                     <div class="card-inner p-3 d-flex flex-column align-items-center">
 <!--                        <img src="https://i.imgur.com/YLsQrn3.png" width="50">-->
                         <div class="icon-holder">
+                            <a href="{{ url_for('logout') }}">
+
                             <i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i>
+
+                            </a>
+
                         </div>
-                        <div class="text-center mg-text"> <span class="mg-text">Logout</span>
+                        <div class="text-center mg-text">
+                                <span class="mg-text">Logout</span>
                         </div>
+
                     </div>
                 </div>
 
+                {% endif %}
 
                 {% if word_found %}
 <!--                if search was successful -->
@@ -205,7 +257,7 @@
 <footer class="page-footer font-small blue">
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Finan Meharena Kidane
+  <div class="footer-copyright text-center py-3">© 2022 Finan Meharena Kidane
 <!--    <a href="/"> MDBootstrap.com</a>-->
   </div>
   <!-- Copyright -->

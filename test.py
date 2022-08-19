@@ -11,39 +11,44 @@ demo=['the place where one lives permanently, especially as a member of a family
 print(len(demo))
 
 
-def shorten_list(my_list):
-    if len(my_list) < 5:
-        if len(my_list) == 0:
-            my_list=['Sorry,Could not find one at the moment.'
-                     'We definitely would soon']
-            return my_list
-    elif len(my_list) > 5:
-        my_list=my_list[:5]
-        return my_list
-    else:
-        return my_list
+# def shorten_list(my_list):
+#     if len(my_list) < 5:
+#         if len(my_list) == 0:
+#             my_list=['Sorry,Could not find one at the moment.'
+#                      'We definitely would soon']
+#             return my_list
+#     elif len(my_list) > 5:
+#         my_list=my_list[:5]
+#         return my_list
+#     else:
+#         return my_list
 
 
-print(shorten_list(demo))
-print(len(shorten_list(demo)))
-
+# print(shorten_list(demo))
+# print(len(shorten_list(demo)))
+#
 
 # print(len(demo))
 #
 # print(len(demo) in range(0,5))
 # print(result)
 
+from main import *
 
+def handle_login():
+    if request.method == 'POST':
+        entered_password = request.form.get('password')
+        entered_email = request.form.get('email')
+        user = Users.query.filter_by(email=entered_email).first()
+        print(user.password)
 
-
-
-
-
-
-
-
-
-
+        if check_password_hash(user.password, entered_password):
+            login_user(user)
+            return render_template('index.html', current_user=current_user)
+        else:
+            return 'incorrect password'
+    else:
+        return render_template('login.html')
 
 #
 # print(response.json())
