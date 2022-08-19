@@ -18,6 +18,15 @@ class Words(my_db.Model, UserMixin):
     id=my_db.Column(Integer, primary_key=True)
     word=my_db.Column(String)
     definitions=my_db.Column(String)
+    examples=my_db.Column(String)
+    saved=my_db.Column(String)
 
 
-# db.create_all()
+class Saved(my_db.Model, UserMixin):
+    __tablename__='saved'
+    id=my_db.Column(Integer, primary_key=True)
+    word=my_db.Column(String)
+
+
+# my_db.drop_all()
+# my_db.create_all()

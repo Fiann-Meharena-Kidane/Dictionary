@@ -17,7 +17,6 @@ app_id = os.environ.get('dictionary_api_id')
 app_key = os.environ.get('dictionary_api_key')
 endpoint = "entries"
 
-
 language_code = "en-us"
 
 app = Flask(__name__)
@@ -52,17 +51,43 @@ def home():
 def result():
     word = request.form.get('word')
     # gets word and pass it to request handler function,
-    response=request_handler(endpoint=endpoint,
-                            app_key=app_key,
-                            app_id=app_id,
-                            language_code=language_code,
-                            word=word)
-    # response outputs dictionary 'data', pass data to index.html
+    response = request_handler(endpoint=endpoint,
+                               app_key=app_key,
+                               app_id=app_id,
+                               language_code=language_code,
+                               word=word)
+
+    new_word_entry = Words(
+        word=word,
+        definitions=response['list_of_definitions'][0],
+        examples=response['list_of_examples'][0]
+    )
+
+    my_db.session.add(new_word_entry)
+    my_db.session.commit()
+
     return render_template('index.html',
                            definitions=shorten_list(response['list_of_definitions']),
                            examples=shorten_list(response['list_of_examples']),
                            word_found=True,
                            message='Ah! Got it!')
+
+
+@app.route('/save', methods=['POST','GET'])
+def save():
+    list_of_rows=Words.query.all()
+    last_row=list_of_rows[0]
+
+    new_word=Saved(
+        word=last_row.word
+    )
+    my_db.session.add(new_word)
+    my_db.session.commit()
+
+    my_db.session.query(Words).delete()
+    my_db.session.commit()
+
+    return render_template('index.html')
 
 
 @app.route('/register', methods=['POST', 'GET'])

@@ -71,9 +71,8 @@ background-color:grey;
 }
 
 a:link {
-    text-decoration: none
+    text-decoration: none;
 }
-
 
 .card-inner {
     position: relative;
