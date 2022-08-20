@@ -181,11 +181,24 @@ padding:2% 0 0;
 
 }
 
+
+.quiz-block{
+text-align:center;
+}
+
+
+
+
+
+
+
+
+
+
 .page-footer{
     position: absolute;
     text-align:center;
     padding-left:40%;
-
 
 }
 

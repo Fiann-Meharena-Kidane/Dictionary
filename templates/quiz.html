@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creating Bootstrap Collapsible Element via Data Attributes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+
+<div class="m-4">
+
+    <p>
+        <!-- Trigger Buttons HTML -->
+        <a href="#myCollapse" data-bs-toggle="collapse">Toggle Element</a>
+        <button type="button" class="btn btn-primary ms-4" data-bs-toggle="collapse" data-bs-target="#myCollapse">Toggle Element</button>
+    </p>
+
+    <!-- Collapsible Element HTML -->
+    <div class="collapse show" id="myCollapse">
+        <div class="card card-body">This is a simple example of showing and hiding specific element via data attributes. Click any trigger buttons to toggle this panel.</div>
+    </div>
+</div>
+</body>
+</html>
