@@ -104,7 +104,7 @@
                         <div class="card-inner p-3 d-flex flex-column align-items-center">
                                 <div class="icon-holder">
 
-                                    <a>
+                                    <a href="{{ url_for('favourite') }}">
                                         <i class="fa-solid fa-star fa-2xl"></i>
                                     </a>
                                 </div>
@@ -175,7 +175,16 @@
 
                 <div class="result-container">
                      <div class="card text-center">
-                             <p class="btn btn-primary btn-lg btn-block">Here We Go!</p>
+
+                         {% if save=='saved' %}
+
+                         <p class="btn btn-success btn-lg btn-block"><i class="fa-solid fa-bookmark fa-2xl"></i></p>
+
+                         {% else %}
+
+                         <p class="btn btn-primary btn-lg btn-block">Here We Go!</p>
+
+                         {% endif %}
 
                           <div class="card-body">
 
@@ -225,10 +234,13 @@
                               </div>
 
                               <div class="level">
-                                    <a href="{{ url_for('save') }}" class="btn btn-outline-success">Save Word</a>
-<!--                                    <a href="#" class="btn btn-outline-success">Lorem M</a>-->
-<!--                                    <a href="#" class="btn btn-outline-danger ">Lorem H</a>-->
+                                    {% if not save=='saved' %}
+                                    <a href="{{ url_for('save') }}" class="btn btn-success"><i class="fa-solid fa-plus"></i>
+                                    </a>
+                                    {% endif %}
+
                               </div>
+
                           </div>
 
                           <div class="card-footer text-muted">
@@ -238,8 +250,31 @@
 
                 </div>
 
+                {% endif %}
+
+                {% if have_favourites %}
+
+                    <div class="container favourites-container">
+                        <div class="row">
+                            {% for word in list_of_favourites %}
+
+
+                                    <div class=" col-lg-3 col-md-6 col-sm-12 favourite-label">
+                                        <a href="{{ url_for('display_favourite', word=word) }}">
+
+                                             <p class="btn btn-primary btn-block "> {{ word.title() }} </p>
+                                        </a>
+                                </div>
+
+
+
+
+                            {% endfor %}
+                        </div>
+                    </div>
 
                 {% endif %}
+
 
 
             </div>

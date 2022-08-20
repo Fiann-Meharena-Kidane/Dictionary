@@ -38,11 +38,12 @@ def load_user(user_id):
 
 @app.route('/')
 def choose():
-    print(current_user)
+    # user either logs in or sign up,
     return render_template('index.html', current_user=False)
 
 
 @app.route('/home', methods=['POST', 'GET'])
+@login_required
 def home():
     return render_template('index.html')
 
@@ -56,38 +57,72 @@ def result():
                                app_id=app_id,
                                language_code=language_code,
                                word=word)
-
+    # each word user searched for is saved for a moment,
     new_word_entry = Words(
         word=word,
-        definitions=response['list_of_definitions'][0],
-        examples=response['list_of_examples'][0]
     )
 
     my_db.session.add(new_word_entry)
     my_db.session.commit()
 
-    return render_template('index.html',
-                           definitions=shorten_list(response['list_of_definitions']),
-                           examples=shorten_list(response['list_of_examples']),
-                           word_found=True,
-                           message='Ah! Got it!')
+    saved_words=Saved.query.all()
+    list_of_saved_words=[]
+    for row in saved_words:
+        list_of_saved_words.append(row.word)
+
+    if word in list_of_saved_words:
+        # if word already exists in favo, don't display the add button,
+        return render_template('index.html',
+                               definitions=shorten_list(response['list_of_definitions']),
+                               examples=shorten_list(response['list_of_examples']),
+                               word_found=True,
+                               message='Ah! Got it!',
+                               save='saved')
+    else:
+        return render_template('index.html',
+                               definitions=shorten_list(response['list_of_definitions']),
+                               examples=shorten_list(response['list_of_examples']),
+                               word_found=True,
+                               message='Ah! Got it!',
+                               )
 
 
 @app.route('/save', methods=['POST','GET'])
 def save():
     list_of_rows=Words.query.all()
-    last_row=list_of_rows[0]
+    try:
+        last_row=list_of_rows[-1]
+    except IndexError:
+        return 'index error'
+    else:
+        pass
 
     new_word=Saved(
         word=last_row.word
     )
+
     my_db.session.add(new_word)
     my_db.session.commit()
+    # save word,
 
     my_db.session.query(Words).delete()
     my_db.session.commit()
+    # clear words data base,
 
-    return render_template('index.html')
+    word=Saved.query.all()[-1].word
+
+    response = request_handler(endpoint=endpoint,
+                               app_key=app_key,
+                               app_id=app_id,
+                               language_code=language_code,
+                               word=word)
+
+    return render_template('index.html',
+                           definitions=shorten_list(response['list_of_definitions']),
+                           examples=shorten_list(response['list_of_examples']),
+                           word_found=True,
+                           message='Ah! Got it!',
+                           save='saved')
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -148,9 +183,46 @@ def logout():
     # return render_template('index.html',current_user=current_user)
 
 
+@app.route('/favourites')
+def favourite():
+    have_favourites=True
+
+    all_favourites=Saved.query.all()
+    list_of_favourites=[]
+
+    for word in all_favourites:
+        list_of_favourites.append(word.word)
+        # we build a list of words saved so far, and pass this list to index
+
+    if not list_of_favourites:
+        # if its empty,
+        have_favourites=False
+
+    return render_template('index.html', have_favourites=have_favourites, list_of_favourites=list_of_favourites)
+
+
+@app.route('/favourite/<word>', methods=['POST', 'GET'])
+def display_favourite(word):
+    response = request_handler(endpoint=endpoint,
+                               app_key=app_key,
+                               app_id=app_id,
+                               language_code=language_code,
+                               word=word)
+    # fetch word details through API request,
+    # then pass result to index.html page,
+    return render_template('index.html',
+                           definitions=shorten_list(response['list_of_definitions']),
+                           examples=shorten_list(response['list_of_examples']),
+                           word_found=True,
+                           message='Ah! Got it!',
+                           save='saved')
+
+
 @app.route('/test')
 @login_required
 def quiz():
     return 'hello'
+
+
 if __name__ == '__main__':
     app.run(debug=True)

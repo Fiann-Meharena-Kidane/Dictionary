@@ -165,13 +165,27 @@ color:black;
 
 }
 
+.fa-bookmark{
+color:green;
+}
 
+.favourites-container{
+background-color:bisque;
+text-align:center;
+padding:2% 0 0;
+
+}
+
+.favourite-label :hover{
+    transform:scale(1.05)
+
+}
 
 .page-footer{
     position: absolute;
     text-align:center;
     padding-left:40%;
-    margin-top:11%;
+
 
 }
 

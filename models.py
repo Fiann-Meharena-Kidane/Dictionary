@@ -17,9 +17,9 @@ class Words(my_db.Model, UserMixin):
     __tablename__='words'
     id=my_db.Column(Integer, primary_key=True)
     word=my_db.Column(String)
-    definitions=my_db.Column(String)
-    examples=my_db.Column(String)
-    saved=my_db.Column(String)
+    # definitions=my_db.Column(String)
+    # examples=my_db.Column(String)
+    # saved=my_db.Column(String)
 
 
 class Saved(my_db.Model, UserMixin):
