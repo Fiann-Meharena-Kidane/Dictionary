@@ -5,7 +5,7 @@ from tools import *
 from models import *
 import random
 
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
 import json
@@ -77,7 +77,7 @@ def result():
         return render_template('index.html',
                                definitions=shorten_list(response['list_of_definitions']),
                                examples=shorten_list(response['list_of_examples']),
-                               word_found=True,
+                               word_found=word,
                                message='Ah! Got it!',
                                save='saved')
     else:
@@ -140,7 +140,8 @@ def add_user():
     password = request.form.get('password')
 
     if Users.query.filter_by(email=email).first():
-        return 'email exists'
+        flash('Email already in  use, login instead.', category='error')
+        return render_template('login.html')
     hashed_password = generate_password_hash(password,
                                              method='pbkdf2:sha256',
                                              salt_length=8)
@@ -166,13 +167,15 @@ def login():
 
         user = Users.query.filter_by(email=entered_email).first()
         if not user:
-            return 'no such email'
+            flash("No such email, please register")
+            return render_template('login.html')
 
         if check_password_hash(user.password, entered_password):
             login_user(user)
             return render_template('index.html', current_user=current_user)
         else:
-            return 'incorrect password'
+            flash('Incorrect Password')
+            return render_template('login.html')
     else:
         return render_template('login.html')
 
@@ -254,16 +257,13 @@ def quiz():
         list_of_deleted_words.append(row.word)
 
     start=True
-
     while start:
         if quiz_word in list_of_deleted_words:
-            quiz_word=random_row.word
-
+            quiz_word=random.choice(saved_words).word
         else:
             start=False
 
     # make sure quiz word is not one of the deleted ones,
-
     response = request_handler(endpoint=endpoint,
                                app_key=app_key,
                                app_id=app_id,

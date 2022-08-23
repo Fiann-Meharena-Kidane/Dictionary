@@ -1,6 +1,3 @@
 footer with copyright and links,
-replace search result section with card from mdbootstarap,
 after saved, saved message,
-instead of definition, display word itself,
-use error flash,
 footer in homepage,

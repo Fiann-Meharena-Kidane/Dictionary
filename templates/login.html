@@ -79,16 +79,36 @@
                             <!-- Email input -->
                               {% if register %}
                             <div class="form-outline mb-4">
+
+                                 {% with messages = get_flashed_messages() %}
+                                                  {% if messages %}
+                                                    <ul class=flashes>
+                                                    {% for message in messages %}
+                                                      <p style="color:red">{{ message }}</p>
+                                                    {% endfor %}
+                                                    </ul>
+                                                  {% endif %}
+                                        {% endwith %}
+
                               <input type="text" name="name" id="form2Example1" class="form-control" required />
                               <label class="form-label" for="form2Example1"> Name </label>
                             </div>
                               {% endif %}
 
-
+                               {% with messages = get_flashed_messages() %}
+                                                  {% if messages %}
+                                                    <ul class=flashes>
+                                                    {% for message in messages %}
+                                                      <p style="color:red">{{ message }}</p>
+                                                    {% endfor %}
+                                                    </ul>
+                                                  {% endif %}
+                                        {% endwith %}
 
                               <div class="form-outline mb-4">
                                       <input type="email"  name="email" class="form-control" required />
                                       <label class="form-label" for="form2Example1"> Email address</label>
+
                               </div>
 
 
