@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'secret'
+app.config['SECRET_KEY'] = os.environ.get('web-dictionary-app-db-secret-key')
 my_db = SQLAlchemy(app)
 
 login_manager = LoginManager()
